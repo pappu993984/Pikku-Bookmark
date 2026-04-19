@@ -63,7 +63,12 @@
       border-radius: 6px;
       transition: 0.3s;
     }
-
+@media (max-width: 600px) {
+  a {
+    width: 95%;
+    font-size: 14px;
+  }
+}
     a:hover {
       background: #00c6ff;
       transform: scale(1.05);
@@ -106,13 +111,14 @@
 
     .popup button {
       margin-top: 10px;
-      padding: 10px 18px;
+      padding: 14px 28px;
       border: none;
       background: white;
       color: #0072ff;
       border-radius: 25px;
       cursor: pointer;
       font-weight: bold;
+      font-size: 16px;
     }
 
     .popup button:hover {
@@ -162,7 +168,6 @@
 
   <!-- Popup -->
   <div id="popup" class="popup">
-    <span class="close-btn" onclick="closePopup()">❌</span>
     <h2>𝕎𝕖𝕝𝕔𝕠𝕞𝕖</h2>
     <p>Welcome to <b>Pikku's First Website</b> 😎</p>
     <button onclick="closePopup()">ℭ𝔬𝔫𝔱𝔦𝔫𝔲𝔢</button>
