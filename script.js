@@ -1,1 +1,1 @@
-alert("Welcome to Pikku's Bookmark.")
+alert("😊 Welcome to Pikku's First website. 😊")
