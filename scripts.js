@@ -1,0 +1,1 @@
+alert("Welcome to Pikku's First website.")
