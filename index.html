@@ -82,79 +82,93 @@
       background: #444;
     }
 
+    /* Popup */
     .popup {
-  position: fixed;
-  top: -100%;
-  left: 50%;
-  transform: translateX(-50%) scale(0.8);
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  color: white;
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  text-align: center;
-  transition: all 0.5s ease;
-  z-index: 1000;
-  width: 300px;
-}
+      position: fixed;
+      top: -100%;
+      left: 50%;
+      transform: translateX(-50%) scale(0.8);
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      text-align: center;
+      transition: all 0.5s ease;
+      z-index: 1000;
+      width: 300px;
+    }
 
-.popup.show {
-  top: 25%;
-  transform: translateX(-50%) scale(1);
-}
+    .popup.show {
+      top: 25%;
+      transform: translateX(-50%) scale(1);
+    }
 
-.popup h2 {
-  margin: 0;
-}
+    .popup button {
+      margin-top: 10px;
+      padding: 10px 18px;
+      border: none;
+      background: white;
+      color: #0072ff;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-.popup p {
-  margin: 10px 0;
-}
-
-.popup button {
-  margin-top: 10px;
-  padding: 10px 18px;
-  border: none;
-  background: white;
-  color: #0072ff;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.popup button:hover {
-  background: #f1f1f1;
-  transform: scale(1.1);
-}
+    .popup button:hover {
+      transform: scale(1.1);
+    }
 
     .dark .popup {
-  background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
-  color: white;
-}
-.popup {
-  backdrop-filter: blur(10px);
-}
-  body.blur {
-  filter: blur(5px);
-}  
+      background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+    }
+
+    /* Blur Background */
+    .blur-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.3);
+      z-index: 999;
+      display: none;
+    }
+
+    .blur-bg.show {
+      display: block;
+    }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .close-btn:hover {
+      color: red;
+    }
   </style>
 </head>
 
 <body>
 
+  <!-- Blur -->
+  <div id="blurBg" class="blur-bg"></div>
+
   <!-- Popup -->
   <div id="popup" class="popup">
-  <span onclick="closePopup()" 
-        style="position:absolute; top:10px; right:15px; cursor:pointer; font-size:20px;">
-        ❌
-  </span>
-  <h2>𝕎𝕖𝕝𝕔𝕠𝕞𝕖!</h2>
-  <p>Welcome to <b>Pikku's First Website</b> 😎</p>
-  <button onclick="closePopup()"> ℭ𝔬𝔫𝔱𝔦𝔫𝔲𝔢 </button>
-</div>
+    <span class="close-btn" onclick="closePopup()">❌</span>
+    <h2>𝕎𝕖𝕝𝕔𝕠𝕞𝕖</h2>
+    <p>Welcome to <b>Pikku's First Website</b> 😎</p>
+    <button onclick="closePopup()">ℭ𝔬𝔫𝔱𝔦𝔫𝔲𝔢</button>
+  </div>
 
-  <h1>👉 My Bookmarks - ▓▒░𝐏𝐚𝐩𝐩𝐮 𝐤𝐮𝐦𝐚𝐫░▒▓ 👈</h1>
+  <h1>👉 My Bookmarks -▓▒░𝐏𝐚𝐩𝐩𝐮 𝐤𝐮𝐦𝐚𝐫░▒▓👈</h1>
 
   <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
 
@@ -177,24 +191,7 @@
     </div>
 
   </div>
-
-  <script>
-    function toggleDark() {
-      document.body.classList.toggle("dark");
-    }
-
-    function closePopup() {
-      document.getElementById("popup").classList.remove("show");
-      document.body.classList.remove("blur"); //
-    }
-
-    window.onload = function() {
-  setTimeout(() => {
-    document.getElementById("popup").classList.add("show");
-    document.body.classList.add("blur");
-  }, 800);
-};
-  </script>
+<script src="script.js"></script>
 
 </body>
 </html>

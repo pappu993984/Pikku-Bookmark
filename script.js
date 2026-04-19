@@ -4,12 +4,16 @@ function toggleDark() {
 
 function closePopup() {
   document.getElementById("popup").classList.remove("show");
-  document.body.classList.remove("blur");
+  document.getElementById("blurBg").classList.remove("show");
+
+  document.body.style.overflow = "auto"; // scroll ON
 }
 
 window.onload = function() {
   setTimeout(() => {
     document.getElementById("popup").classList.add("show");
-    document.body.classList.add("blur");
+    document.getElementById("blurBg").classList.add("show");
+
+    document.body.style.overflow = "hidden"; // scroll OFF
   }, 800);
 };
