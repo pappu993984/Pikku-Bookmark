@@ -1,0 +1,385 @@
+.dark-theme {
+    --bg-body: #1e1e1e;
+    --bg-calc: #202020;
+    --text-color: white;
+    --text-history: #a0a0a0;
+    --bg-btn: #2b2b2b;
+    --bg-btn-hover: #323232;
+    --bg-num: #3b3b3b;
+    --bg-num-hover: #454545;
+    --bg-sidebar: #2d2d2d;
+    --bg-menu-item: #383838;
+}
+
+.light-theme {
+    --bg-body: #f3f3f3;
+    --bg-calc: #e6e6e6;
+    --text-color: black;
+    --text-history: #666666;
+    --bg-btn: #f9f9f9;
+    --bg-btn-hover: #f0f0f0;
+    --bg-num: #ffffff;
+    --bg-num-hover: #f5f5f5;
+    --bg-sidebar: #f0f0f0;
+    --bg-menu-item: #e0e0e0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--bg-body);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    transition: background-color 0.3s;
+}
+
+.calculator {
+    position: relative;
+    background-color: var(--bg-calc);
+    color: var(--text-color);
+    padding: 10px;
+    border-radius: 8px;
+    width: 320px;
+    box-shadow: 0px 15px 35px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: background-color 0.3s;
+}
+
+.calc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-icon {
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+}
+.menu-icon:hover {
+    background-color: var(--bg-btn-hover);
+}
+
+#theme-toggle {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* --- नया साइडबार और व्यू सिस्टम CSS --- */
+.sidebar {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-sidebar);
+    color: var(--text-color);
+    z-index: 10;
+    transition: 0.3s ease;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+/* व्यू छिपाने और दिखाने की सेटिंग्स */
+.sidebar-section {
+    display: none;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar-section.active-view {
+    display: flex;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--text-history);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.close-btn {
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.back-btn {
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-history);
+}
+.back-btn:hover {
+    color: var(--text-color);
+}
+
+/* मेनू बटन्स स्टाइल */
+.menu-options {
+    margin-top: 15px;
+}
+
+.menu-item-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-menu-item);
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+.menu-item-btn:hover {
+    filter: brightness(1.2);
+}
+
+.history-title {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+#history-log {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 5px;
+}
+
+.history-item {
+    text-align: right;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed rgba(128,128,128,0.2);
+    padding-bottom: 5px;
+}
+
+.history-expr {
+    font-size: 14px;
+    color: var(--text-history);
+}
+
+.history-res {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+.empty-msg {
+    color: var(--text-history);
+    font-style: italic;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* डिलीट हिस्ट्री बटन */
+.clear-history-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-history);
+    color: var(--text-color);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: auto;
+    font-weight: bold;
+}
+.clear-history-btn:hover {
+    background-color: #ff4d4d;
+    color: white;
+    border-color: #ff4d4d;
+}
+
+/* --- पुराना डिस्प्ले और बटन डिज़ाइन --- */
+#history {
+    height: 25px;
+    font-size: 16px;
+    color: var(--text-history);
+    text-align: right;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#display {
+    width: 100%;
+    height: 55px;
+    background: transparent;
+    color: var(--text-color);
+    border: none;
+    outline: none;
+    font-size: 42px;
+    text-align: right;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.memory-keys {
+    display: flex;
+    justify-content: flex-start; /* टेक्स्ट को बिल्कुल बीच में लाने के लिए */
+    align-items: center;
+    padding: 5px 10px 5px 15px;
+    font-size: 14px; /* फॉन्ट साइज को थोड़ा बड़ा और साफ करने के लिए */
+    color: #00ffbb; /* हल्का ग्रे रंग जो डार्क थीम पर अच्छा लगे */
+    margin-bottom: 14px;
+    font-weight: 400; /* अक्षरों को थोड़ा सा मोटा करने के लिए */
+    letter-spacing: 0.5px; /* अक्षरों के बीच की दूरी को सुंदर बनाने के लिए */
+
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+}
+
+button {
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: var(--bg-btn);
+    color: var(--text-color);
+    transition: background-color 0.1s;
+    border-radius: 6px; /* <--- यह नई लाइन नंबर 263.5 पर जोड़ें */
+}
+
+
+button:hover {
+    background-color: var(--bg-btn-hover);
+}
+
+.number {
+    background-color: var(--bg-num);
+    font-weight: 600;
+}
+
+.number:hover {
+    background-color: var(--bg-num-hover);
+}
+
+.operator {
+    font-size: 20px;
+}
+
+.equal {
+    background-color: #4cc2ff;
+    color: black;
+    font-size: 20px;
+}
+
+.equal:hover {
+    background-color: #0078d4;
+    color: white;
+}
+/* --- बटन्स के क्लिक होने पर चारों तरफ 3D शैडो और दबने का इफेक्ट --- */
+button:active {
+    position: relative;
+    z-index: 5; /* बटन को बाकी बटन्स से ऊपर लाएगा ताकि शैडो चारों तरफ दिखे */
+    transform: scale(0.95); /* बटन को चारों तरफ से बराबर छोटा करेगा */
+    box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.4); /* चारों तरफ गहरी और साफ परछाई */
+    border-radius: 5px; /* कोनों को उभारने के लिए */
+    filter: brightness(0.85); /* रंग को हल्का सा गहरा करेगा */
+    transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+/* बराबर (=) वाले बटन के लिए खास क्लिक इफेक्ट */
+.equal:active {
+    background-color: #005a9e !important;
+    color: white !important;
+    box-shadow: 0px 4px 10px rgba(0, 90, 158, 0.5); /* नीले बटन के लिए नीली शैडो */
+}
+/* --- रिपल्स एनिमेशन के लिए बटन सेटिंग्स --- */
+button {
+    position: relative;
+    overflow: hidden; /* रिपल लहर को बटन से बाहर जाने से रोकेगा */
+}
+
+/* बटन के क्लिक होने पर चारों तरफ 3D स्काई ब्लू शैडो और दबने का इफेक्ट */
+button:active {
+    z-index: 5;
+    transform: scale(0.95);
+    box-shadow: 0px 4px 12px #00d2ff; /* आपकी मनपसंद स्काई ब्लू शैडो */
+    border-radius: 4px;
+    filter: brightness(0.9);
+    transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+/* बराबर (=) वाले बटन के लिए खास क्लिक इफेक्ट */
+.equal:active {
+    background-color: #005a9e !important;
+    color: white !important;
+    box-shadow: 0px 4px 12px #00d2ff;
+}
+
+/* रिपल वेव (लहर) की स्टाइल */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 210, 255, 0.4); /* स्काई ब्लू रिपल इफ़ेक्ट */
+    transform: scale(0);
+    animation: ripple-animation 0.4s linear;
+    pointer-events: none; /* ताकि माउस क्लिक में रुकावट न आए */
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+/* --- माउस क्लिक और कीबोर्ड दोनों के लिए समान 3D और शैडो इफेक्ट --- */
+button:active, button.active-key {
+    position: relative;
+    z-index: 5;
+    transform: scale(0.95);
+    box-shadow: 0px 4px 12px #00d2ff; /* स्काई ब्लू शैडो */
+    border-radius: 4px;
+    filter: brightness(0.9);
+    transition: transform 0.05s ease, box-shadow 0.05s ease;
+}
+
+/* बराबर (=) वाले बटन के लिए खास इफेक्ट */
+.equal:active, .equal.active-key {
+    background-color: #005a9e !important;
+    color: white !important;
+    box-shadow: 0px 4px 12px #00d2ff;
+}
+
+/* रिपल लहर की स्टाइल */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0, 210, 255, 0.4);
+    transform: scale(0);
+    animation: ripple-animation 0.4s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+

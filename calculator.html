@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😊Pikku's Calculator😊 : The First Calculator Of My Life.</title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body class="dark-theme">
+
+<div class="calculator">
+    <!-- टॉप हेडर बार -->
+    <div class="calc-header" style="display: flex; justify-content: space-between; align-items: center; width: 100%; box-sizing: border-box;">
+        <div class="header-left" style="display: flex; align-items: center;">
+            <button id="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <span class="calc-title">Standard</span>
+        </div>
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-btn" onclick="toggleTheme()" style="background: none; border: none; cursor: pointer; font-size: 16px; padding: 5px 10px;">☀️</button>
+        </div>
+    </div>
+
+    <!-- कैलकुलेटर स्क्रीन/डिस्प्ले -->
+    <div class="screen">
+        <div id="history" class="history-display"></div>
+        <input type="text" id="display" value="0" readonly>
+    </div>
+
+    <!-- यहाँ पर आपका स्काई ब्लू कलर में नाम जोड़ा गया है (मेमोरी बटन्स की जगह) -->
+    <div class="developer-credit-bar" style="display: flex; justify-content: flex-start; align-items: center; padding: 5px 15px; font-size: 13px; color: #00d2ff; font-weight: 500; font-family: sans-serif; letter-spacing: 0.5px;">
+        Developed By Pappu Kumar.
+    </div>
+
+    <!-- साइडबार पैनल (मेनू -> हिस्ट्री स्ट्रक्चर) -->
+    <div id="history-sidebar" class="sidebar">
+                    <!-- मुख्य मेनू व्यू -->
+        <div id="menu-view" class="sidebar-section active-view">
+            <div class="sidebar-header" style="display: flex; align-items: center; justify-content: flex-start; width: 100%;">
+                <!-- बैक तीर का निशान -->
+                <button class="back-btn" onclick="toggleSidebar()" style="background: none; border: none; color: white; cursor: pointer; font-size: 16px; padding: 0; margin-right: 12px; display: flex; align-items: center;">←</button>
+                <!-- ठीक तीर के बाद लेफ्ट साइड में Menu टेक्स्ट -->
+                <span class="sidebar-title" style="margin: 0; font-weight: 600; text-align: left; flex-grow: 1;">Menu</span>
+                <!-- कोने में बंद करने का बटन -->
+                <button class="close-btn" onclick="toggleSidebar()" style="background: none; border: none; color: white; cursor: pointer; font-size: 16px; padding: 0;">×</button>
+            </div>
+            <div class="menu-options">
+                <div class="menu-item-btn" onclick="openHistoryView()"><span>🕒 History</span></div>
+            </div>
+        </div>
+
+
+
+        <!-- हिस्ट्री व्यू -->
+        <div id="history-view" class="sidebar-section">
+            <div class="sidebar-header">
+                <button class="back-btn" onclick="openMenuView()">← Back</button>
+                <button class="close-btn" onclick="toggleSidebar()">×</button>
+            </div>
+            <div id="history-log">
+                <p class="empty-msg">There's no history yet</p>
+            </div>
+            <button class="clear-history-btn" onclick="clearAllHistory()">🗑️ Clear All</button>
+        </div>
+    </div>
+
+    <!-- कैलकुलेटर बटन्स ग्रिड -->
+    <div class="buttons">
+        <button class="operator" onclick="appendValue('%')">%</button>
+        <button class="operator" onclick="clearEntry()">CE</button>
+        <button class="operator" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="backspace()">⌫</button>
+
+        <button class="operator" onclick="fraction()">¹/x</button>
+        <button class="operator" onclick="square()">x²</button>
+        <button class="operator" onclick="sqrt()">²√x</button>
+        <button class="operator" onclick="appendValue('/')">÷</button>
+
+        <button class="number" onclick="appendValue('7')">7</button>
+        <button class="number" onclick="appendValue('8')">8</button>
+        <button class="number" onclick="appendValue('9')">9</button>
+        <button class="operator" onclick="appendValue('*')">×</button>
+
+        <button class="number" onclick="appendValue('4')">4</button>
+        <button class="number" onclick="appendValue('5')">5</button>
+        <button class="number" onclick="appendValue('6')">6</button>
+        <button class="operator" onclick="appendValue('-')">-</button>
+
+        <button class="number" onclick="appendValue('1')">1</button>
+        <button class="number" onclick="appendValue('2')">2</button>
+        <button class="number" onclick="appendValue('3')">3</button>
+        <button class="operator" onclick="appendValue('+')">+</button>
+
+        <button class="number" onclick="toggleSign()">+/-</button>
+        <button class="number" onclick="appendValue('0')">0</button>
+        <button class="number" onclick="appendValue('.')">.</button>
+        <button class="equal" id="equal-btn" onclick="calculate()">=</button>
+    </div>
+</div>
+
+<script src="calculator.js"></script>
+</body>
+</html>
