@@ -1,244 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>😊Pikku's Bookmark 😊| The First Website of my life.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>😊Pikku's Bookmark 😊| The First Website of my life.</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://googleapis.com" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: #f4f6f9;
+            text-align: center;
+            transition: 0.3s;
+        }
 
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-      background: #f4f6f9;
-      text-align: center;
-      transition: 0.3s;
-    }
+        h1 {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            color: white;
+            padding: 15px;
+            margin: 0;
+        }
 
-    h1 {
-      background: linear-gradient(to right, #00c6ff, #0072ff);
-      color: white;
-      padding: 15px;
-      margin: 0;
-    }
+        .toggle-btn {
+            margin: 15px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            background: black;
+            color: white;
+            cursor: pointer;
+        }
 
-    .toggle-btn {
-      margin: 15px;
-      padding: 8px 15px;
-      border: none;
-      border-radius: 6px;
-      background: black;
-      color: white;
-      cursor: pointer;
-    }
+        /* आपका पुराना ओरिजिनल कंटेनर स्टाइल */
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            margin: auto;
+        }
 
-    .container {
-      width: 90%;
-      max-width: 600px;
-      margin: auto;
-    }
+        /* सभी सफेद बॉक्स (Cards) की चौड़ाई को वापस पहले जैसा नॉर्मल और छोटा करने के लिए */
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px auto; /* auto लगाने से सब कुछ बीच में रहेगा */
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px; /* 👈 यह आपके शॉपिंग और बाकी बॉक्स को वापस छोटा और सुंदर कर देगा */
+            box-sizing: border-box;
+        }
 
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 20px 0;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    }
+        h2 {
+            border-bottom: 2px solid #0072ff;
+            padding-bottom: 5px;
+        }
 
-    h2 {
-      border-bottom: 2px solid #0072ff;
-      padding-bottom: 5px;
-    }
+        a {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 80%;
+            background: #0072ff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
 
-    a {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      width: 80%;
-      background: #0072ff;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      transition: 0.3s;
-    }
-@media (max-width: 600px) {
-  a {
-    width: 95%;
-    font-size: 14px;
-  }
-}
-    a:hover {
-      background: #00c6ff;
-      transform: scale(1.05);
-    }
+        @media (max-width: 600px) {
+            a {
+                width: 95%;
+                font-size: 14px;
+            }
+            .side-tools-card {
+                position: static !important;
+                max-width: 100% !important;
+                margin: 20px 0 !important;
+            }
+        }
 
-    .dark {
-      background: #121212;
-      color: white;
-    }
+        a:hover {
+            background: #00c6ff;
+            transform: scale(1.05);
+        }
 
-    .dark .card {
-      background: #1e1e1e;
-    }
+        .dark {
+            background: #121212;
+            color: white;
+        }
 
-    .dark a {
-      background: #444;
-    }
+        .dark .card {
+            background: #1e1e1e;
+        }
 
-    /* Popup */
-    .popup {
-      position: fixed;
-      top: -100%;
-      left: 50%;
-      transform: translateX(-50%) scale(0.8);
-      background: linear-gradient(135deg, #00c6ff, #0072ff);
-      color: white;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      text-align: center;
-      transition: all 0.5s ease;
-      z-index: 1000;
-      width: 300px;
-    }
+        .dark a {
+            background: #444;
+        }
 
-    .popup.show {
-      top: 25%;
-      transform: translateX(-50%) scale(1);
-    }
+        /* Popup */
+        .popup {
+            position: fixed;
+            top: -100%;
+            left: 50%;
+            transform: translate(-50%) scale(0.8);
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.5s ease;
+            z-index: 1000;
+            width: 300px;
+        }
 
-    .popup button {
-      margin-top: 10px;
-      padding: 14px 28px;
-      border: none;
-      background: white;
-      color: #0072ff;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 16px;
-    }
+        .popup.show {
+            top: 25%;
+            transform: translate(-50%) scale(1);
+        }
 
-    .popup button:hover {
-      transform: scale(1.1);
-    }
+        .popup button {
+            margin-top: 10px;
+            padding: 14px 28px;
+            border: none;
+            background: white;
+            color: #0072ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+        }
 
-    .dark .popup {
-      background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
-    }
+        .popup button:hover {
+            transform: scale(1.1);
+        }
 
-    /* Blur Background */
-    .blur-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      backdrop-filter: blur(6px);
-      background: rgba(0,0,0,0.3);
-      z-index: 999;
-      display: none;
-    }
+        .dark .popup {
+            background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+        }
 
-    .blur-bg.show {
-      display: block;
-    }
+        /* Blur Background */
+        .blur-bg {
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(6px);
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
 
-    /* Close button */
-    .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      cursor: pointer;
-      font-size: 20px;
-    }
+        .blur-bg.show {
+            display: block;
+        }
 
-    .close-btn:hover {
-      color: red;
-    }
-  </style>
+        /* close button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .close-btn:hover {
+            color: red;
+        }
+
+        /* एडिशनल बॉक्स को राइट साइड में सेट रखने के लिए */
+        .side-tools-card {
+            position: absolute;
+            left: 630px;
+            top: 0;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px 0 0 0;
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- Blur -->
-  <div id="blurBg" class="blur-bg"></div>
+    <!-- Blur -->
+    <div id="blurBg" class="blur-bg"></div>
 
-  <!-- Popup -->
-  <div id="popup" class="popup">
-    <h2>𝕎𝕖𝕝𝕔𝕠𝕞𝕖</h2>
-    <p>Welcome to <b>Pikku's First Website</b> 😎</p>
-    <button onclick="closePopup()">ℭ𝔬𝔫𝔱𝔦𝔫𝔲𝔢</button>
-  </div>
-
-  <h1>👉 My Bookmarks -▓▒░𝐏𝐚𝐩𝐩𝐮 𝐤𝐮𝐦𝐚𝐫░▒▓👈</h1>
-
-  <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
-
-  <div class="container">
-    
-    <div class="card">
-      <h2>✔ Primary Bookmarks ( Education ) </h2>
-      <a href="https://josaa.nic.in/" target="_blank">Note - JOSAA COUNSELLING</a>
-      <a href="https://jeemain.nta.nic.in/" target="_blank">1. Open JEE MAIN</a>
-      <a href="https://jeeadv.ac.in/" target="_blank">2. Open JEE ADVANCED</a>
-      <a href="https://cuet.nta.nic.in/" target="_blank">3. Open CUET</a>
-      <a href="https://neet.nta.nic.in/" target="_blank">4. Open NEET UG</a>
-      <a href="https://www.cbse.gov.in/" target="_blank">5. Open C B S E</a>
-      <a href="https://upsc.gov.in/index.php" target="_blank">6. Open U P S C</a>
-      <a href="https://allen.in/" target="_blank">7. Open Allen</a>
-      <a href="https://PW.live/" target="_blank">8. Open Physics Wallah</a>
-      <a href="https://www.vibrantacademy.com/" target="_blank">9. Open Vibrant Academy</a>
-      <a href="https://careerwill.com/" target="_blank">10. Open CareerWill</a>
-      <a href="https://byjus.com/" target="_blank">11. Open BYJU’S</a>
-      <a href="https://www.vedantu.com/" target="_blank">12. Open Vedantu</a>
-      <a href="https://unacademy.com/" target="_blank">13. Open Unacademy</a>
-      <a href="https://www.khanglobalstudies.com/" target="_blank">14. Open khan Global Studies</a>
-      <a href="https://www.aakash.ac.in/" target="_blank">15. Open Aakash</a>
-    </div> 
-
-    <div class="card">
-      <h2>✔ Secondary Bookmarks ( Shoping )</h2>
-      <a href="https://www.amazon.in" target="_blank">1. Open Amazon</a>
-      <a href="https://www.flipkart.com/" target="_blank">2. Open Flipkart</a>
-      <a href="https://www.Myntra.com" target="_blank">3. Open Myntra</a>
-      <a href="https://open.Meesho.com/" target="_blank">4. Open Meesho</a>
-      <a href="https://open.Ajio.com/" target="_blank">5. Open Ajio</a>
-      <a href="https://open.JioMart.com/" target="_blank">6. Open JioMart</a>
-      <a href="https://www.Nykaa.com/" target="_blank">7. Open Nykaa</a> 
-      <a href="https://www.BigBasket.com/" target="_blank">8. Open Bigbasket</a>
-      <a href="https://www.IndiaMART.com/" target="_blank">9. Open IndaiMart</a>
-      <a href="https://www.tatacliq.com//" target="_blank">10. Open Tata CLiQ</a>
-      <a href="https://blinkit.com/" target="_blank">11. Open Blinkit</a>
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <h2>Welcome</h2>
+        <p>Welcome to <b>Pikku's First Website</b> 😎</p>
+        <button onclick="closePopup()">ℭ𝔬𝔫𝔱𝔦𝔫𝔲𝔢</button>
     </div>
 
-    <div class="card">
-      <h2>✓ Entertainment Bookmarks </h2>
-      <a href="https://www.Hotstar.com" target="_blank">1. Open JioHotstar</a>
-      <a href="https://www.Netflix.com" target="_blank">2. Open Netflix</a>
-      <a href="https://www.PrimeVideo.com" target="_blank">3. Open Amazon PrimeVideo</a>
-      <a href="https://www.YouTube.com" target="_blank">4. Open YouTube</a>
-      <a href="https://www.BookMyShow.com" target="_blank">5. Open BookMyShow</a>
-      <a href="https://www.Spotify.com" target="_blank">6. Open Spotify</a>
-      <a href="https://www.MXPlayer.in" target="_blank">7. Open MX Player</a>
-      <a href="https://www.SonyLIV.com" target="_blank">8. Open SonyLIV</a>
-      <a href="https://www.ZEE5.com" target="_blank">9. Open ZEE5</a>
-      <a href="https://www.JioSaavn.com" target="_blank">10. Open JioSaavn</a>
-    </div>
+    <h1>👉 My Bookmarks - ▓▒░𝐏𝐚𝐩𝐩𝐮 𝐤𝐮𝐦𝐚𝐫░▒▓ 👈</h1>
 
-    <div class="card">
-      <h2>✓ Top Browsers </h2>
-      <a href="https://www.google.com" target="_blank">1. Open Google</a>
-      <a href="https://www.microsoft.com/en-us/edge/?form=MA13FJ&ch=1" target="_blank">2. Open Microsoft Edge</a>
-      <a href="https://www.opera.com/" target="_blank">3. Open Opera</a>
-      <a href="https://www.apple.com/in/safari/" target="_blank">4. Open safari</a>
-      <a href="https://brave.com/" target="_blank">5. Open Brave</a>
-    </div>
+    <button class="toggle-btn" onclick="toggleDark()">🌙 Dark Mode</button>
+ <div class="card side-tools-card" id="pikku-calc-box"></div>
 
-  </div>
-<script src="script.js"></script>
+    <div class="container">
 
+        <!-- 1. Primary Bookmarks (Education) -->
+        <div class="card">
+            <h2>✓ Primary Bookmarks ( Education )</h2>
+            <a href="https://josaa.nic.in" target="_blank">Note - JOSAA COUNSELLING</a>
+            <a href="https://nta.nic.in" target="_blank">1. Open JEE MAIN</a>
+            <a href="https://jeeadv.ac.in" target="_blank">2. Open JEE ADVANCED</a>
+            <a href="https://nta.nic.in" target="_blank">3. Open CUET</a>
+            <a href="https://nta.nic.in" target="_blank">4. Open NEET UG</a>
+            <a href="https://cbse.gov.in" target="_blank">5. Open C B S E</a>
+            <a href="https://upsc.gov.in" target="_blank">6. Open U P S C</a>
+            <a href="https://allen.ac.in" target="_blank">7. Open Allen</a>
+            <a href="https://pw.live" target="_blank">8. Open Physics Wallah</a>
+            <a href="https://vibrantacademy.com" target="_blank">9. Open Vibrant Academy</a>
+            <a href="https://careerwill.com" target="_blank">10. Open Careerwill</a>
+            <a href="https://byjus.com" target="_blank">11. Open BYJU'S</a>
+            <a href="https://vedantu.com" target="_blank">12. Open Vedantu</a>
+            <a href="https://unacademy.com" target="_blank">13. Open Unacademy</a>
+            <a href="https://khanglobalstudies.com" target="_blank">14. Open khan Global Studies</a>
+            <a href="https://aakash.ac.in" target="_blank">15. Open Aakash</a>
+        </div>
+<div class="card side-tools-card">
+    <h2>✓ Additional Bookmarks ( Tools )</h2>
+    <a href="https://github.io" target="_blank">
+        🧮 Open Pikku's Calculator
+    </a>
+</div>
+        <!-- 3. Secondary Bookmarks (Shopping) -->
+        <div class="card">
+            <h2>✓ Secondary Bookmarks ( Shoping )</h2>
+            <a href="https://amazon.in" target="_blank">1. Open Amazon</a>
+            <a href="https://flipkart.com" target="_blank">2. Open Flipkart</a>
+            <a href="https://myntra.com" target="_blank">3. Open Myntra</a>
+            <a href="https://meesho.com" target="_blank">4. Open Meesho</a>
+            <a href="https://ajio.com" target="_blank">5. Open Ajio</a>
+            <a href="https://jiomart.com" target="_blank">6. Open JioMart</a>
+            <a href="https://nykaa.com" target="_blank">7. Open Nykaa</a>
+            <a href="https://bigbasket.com" target="_blank">8. Open Bigbasket</a>
+            <a href="https://indiamart.com" target="_blank">9. Open IndaiMart</a>
+            <a href="https://tatacliq.com" target="_blank">10. Open Tata CliQ</a>
+            <a href="https://blinkit.com" target="_blank">11. Open Blinkit</a>
+        </div>
+
+        <!-- 4. Entertainment Bookmarks -->
+        <div class="card">
+            <h2>✓ Entertainment Bookmarks </h2>
+            <a href="https://hotstar.com" target="_blank">1. Open JioHotstar</a>
+            <a href="https://netflix.com" target="_blank">2. Open Netflix</a>
+            <a href="https://primevideo.com" target="_blank">3. Open Amazon PrimeVide</a>
+            <a href="https://youtube.com" target="_blank">4. Open YouTube</a>
+            <a href="https://bookmyshow.com" target="_blank">5. Open BookMyShow</a>
+            <a href="https://spotify.com" target="_blank">6. Open Spotify</a>
+            <a href="https://mxplayer.in" target="_blank">7. Open MX Player</a>
+            <a href="https://sonyliv.com" target="_blank">8. Open SonyLIV</a>
+            <a href="https://zee5.com" target="_blank">9. Open ZEE5</a>
+            <a href="https://jiosaavn.com" target="_blank">10. Open JioSaavn</a>
+        </div>
+
+        <!-- 5. Top Browsers -->
+        <div class="card">
+            <h2>✓ Top Browsers </h2>
+            <a href="https://google.com" target="_blank">1. Open Google</a>
+            <a href="https://microsoft.com" target="_blank">2. Open Edge</a>
+            <a href="https://opera.com" target="_blank">3. Open Opera</a>
+            <a href="https://apple.com" target="_blank">4. Open safari</a>
+            <a href="https://brave.com" target="_blank">5. Open Brave</a>
+        </div>
+
+    </div> <!-- कंटेनर क्लोज -->
+
+    <script src="script.js"></script>
 </body>
 </html>
